@@ -218,7 +218,7 @@ public class TArrayList<E> extends TAbstractList<E> implements TCloneable, TSeri
 
     private void checkIndex(int index) {
         if (index < 0 || index >= size) {
-            throw new TIndexOutOfBoundsException();
+            throw new TIndexOutOfBoundsException("Index " + index + " out of bounds for length " + size);
         }
     }
 

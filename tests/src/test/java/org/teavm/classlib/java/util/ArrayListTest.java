@@ -57,6 +57,20 @@ public class ArrayListTest {
     }
 
     @Test
+    public void getOutOfBoundsHasAndroidMessage() {
+        List<String> list = new ArrayList<>();
+        list.add("A");
+        for (int index : new int[] { -1, 1, 2 }) {
+            try {
+                list.get(index);
+                fail("Expected out-of-bounds at " + index);
+            } catch (IndexOutOfBoundsException error) {
+                assertEquals("Index " + index + " out of bounds for length 1", error.getMessage());
+            }
+        }
+    }
+
+    @Test
     public void elementsInserted() {
         List<Integer> list = fillFromZeroToNine();
         list.add(5, -1);
