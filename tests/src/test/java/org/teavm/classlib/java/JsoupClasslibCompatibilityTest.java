@@ -27,6 +27,7 @@ import java.net.SocketTimeoutException;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.util.Collections;
+import java.util.Locale;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.teavm.junit.TeaVMTestRunner;
@@ -43,6 +44,28 @@ public class JsoupClasslibCompatibilityTest {
             return;
         }
         throw new AssertionError("Illegal charset name was accepted");
+    }
+
+    @Test
+    public void windows1252MapsEuroAndAlias() {
+        Charset charset = Charset.forName("windows-1252");
+        assertTrue(Charset.isSupported("cp1252"));
+        assertTrue(charset == Charset.forName("cp1252"));
+        assertEquals("€", new String(new byte[] { (byte) 0x80 }, charset));
+        assertEquals(0x80, "€".getBytes(charset)[0] & 0xff);
+        assertFalse(charset.newEncoder().canEncode("中"));
+    }
+
+    @Test
+    public void charsetNamesIgnoreDefaultLocale() {
+        Locale previous = Locale.getDefault();
+        try {
+            Locale.setDefault(new Locale("tr", "TR"));
+            assertTrue(Charset.isSupported("windows-1252"));
+            assertTrue(Charset.forName("WINDOWS-1252") == Charset.forName("cp1252"));
+        } finally {
+            Locale.setDefault(previous);
+        }
     }
 
     @Test

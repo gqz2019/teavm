@@ -20,6 +20,7 @@ import org.teavm.classlib.java.nio.charset.impl.TGBKCharset;
 import org.teavm.classlib.java.nio.charset.impl.TIso8859Charset;
 import org.teavm.classlib.java.nio.charset.impl.TUTF16Charset;
 import org.teavm.classlib.java.nio.charset.impl.TUTF8Charset;
+import org.teavm.classlib.java.nio.charset.impl.TWindows1252Charset;
 
 public final class TStandardCharsets {
     private TStandardCharsets() {
@@ -32,4 +33,5 @@ public final class TStandardCharsets {
     public static final TCharset UTF_16BE = new TUTF16Charset("UTF-16BE", false, false);
     public static final TCharset UTF_16LE = new TUTF16Charset("UTF-16LE", false, true);
     public static final TCharset GBK = new TGBKCharset();
+    public static final TCharset WINDOWS_1252 = new TWindows1252Charset();
 }
