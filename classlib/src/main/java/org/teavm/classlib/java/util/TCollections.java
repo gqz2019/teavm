@@ -65,6 +65,8 @@ public final class TCollections extends TObject {
 
     @SuppressWarnings("rawtypes")
     public static final TList EMPTY_LIST = new TTemplateCollections.AbstractImmutableList<>() {
+        @Override public void clear() {
+        }
         @Override public Object get(int index) {
             throw new TIndexOutOfBoundsException();
         }

@@ -56,9 +56,18 @@ public class TBufferedReader extends TReader {
 
     @Override
     public void close() throws IOException {
-        requireOpened();
-        innerReader.close();
-        innerReader = null;
+        if (innerReader != null) {
+            try {
+                innerReader.close();
+            } finally {
+                innerReader = null;
+            }
+        }
+    }
+
+    @Override
+    public boolean markSupported() {
+        return true;
     }
 
     @Override
