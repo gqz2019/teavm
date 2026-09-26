@@ -69,6 +69,18 @@ public class JsoupClasslibCompatibilityTest {
     }
 
     @Test
+    public void shiftJisMapsKanjiAndHalfwidthKana() {
+        Charset charset = Charset.forName("Shift_JIS");
+        assertEquals("中ｶ", new String(new byte[] { (byte) 0x92, (byte) 0x86, (byte) 0xb6 }, charset));
+        byte[] encoded = "中ｶ".getBytes(charset);
+        assertEquals(3, encoded.length);
+        assertEquals(0x92, encoded[0] & 0xff);
+        assertEquals(0x86, encoded[1] & 0xff);
+        assertEquals(0xb6, encoded[2] & 0xff);
+        assertFalse(charset.newEncoder().canEncode("€"));
+    }
+
+    @Test
     public void sharedEmptyListClearIsNoOp() {
         Collections.emptyList().clear();
         assertTrue(Collections.emptyList().isEmpty());
