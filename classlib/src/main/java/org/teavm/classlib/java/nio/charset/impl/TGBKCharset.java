@@ -22,7 +22,8 @@ import org.teavm.classlib.java.nio.charset.TStandardCharsets;
 
 public class TGBKCharset extends TCharset {
     public TGBKCharset() {
-        super("GBK", new String[] { "CP936", "windows-936" });
+        super("GBK", new String[] { "CP936", "GB2312", "GBK", "GB_2312-80", "MS936", "chinese", "csGB2312",
+                "csISO58GB231280", "iso-ir-58", "windows-936" });
     }
 
     @Override
