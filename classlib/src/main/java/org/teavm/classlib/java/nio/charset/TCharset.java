@@ -153,9 +153,12 @@ public abstract class TCharset implements Comparable<TCharset> {
         static {
             TCharset[] charsets = { TStandardCharsets.UTF_8, TStandardCharsets.US_ASCII,
                     TStandardCharsets.ISO_8859_1, TStandardCharsets.UTF_16, TStandardCharsets.UTF_16BE,
-                    TStandardCharsets.UTF_16LE };
+                    TStandardCharsets.UTF_16LE, TStandardCharsets.GBK };
             for (TCharset charset : charsets) {
                 value.put(charset.name(), charset);
+                for (String alias : charset.aliases()) {
+                    value.put(alias.toUpperCase(), charset);
+                }
             }
         }
     }
